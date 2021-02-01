@@ -1,4 +1,4 @@
-# Teacher Data Tracker #
+# Teacher Data Tracker: Letter Identification #
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,7 +17,7 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Heading ##
-  > Teacher Assessment Tracker
+  > Teacher Assessment Tracker: Letter Identification
 
 ## Sub-Heading ##
   > Spend less time entering assessment data and more time doing what you love - teaching
@@ -32,13 +32,13 @@ Once the project moves into development, the press release can be used as a touc
   > By simplifying the data entry process, teachers can reclaim valuable planning time and create lesson and intervention plans where needed to address a specific student's needs directly.
 
 ## Quote from You ##
-  > "In the grand scheme of things, it's our students that benefit from simplifying and streamlining difficult and time consuming teacher requirements."
+  > "In today's day and age, it's important to give teachers back as much of their planning time as possible - that way, everyone wins."
 
 ## How to Get Started ##
   > To get started, simply upload a csv or text file with your student names, then begin your assessments!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "Assessments used to take me hours to complete and analyze. With this product, I get it done in a fraction of the time and can spend time adjusting lesson plans to fit my student's needs."
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Ready to cut your assessment time in half? Get started with this app!
