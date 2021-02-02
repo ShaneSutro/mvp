@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-module.exports.Student = new Schema({
+module.exports.studentsSchema = new Schema({
   id: Number,
   firstName: String,
   lastName: String,
@@ -10,12 +10,12 @@ module.exports.Student = new Schema({
   lettersKnown: Number
 });
 
-module.exports.Letters = new Schema({
+module.exports.lettersSchema = new Schema({
   id: Number,
   letter: String
 })
 
-module.exports.StudentsLetters = new Schema({
+module.exports.studentsLettersSchema = new Schema({
   id: ObjectId,
   id_letters: Number,
   id_students: Number
