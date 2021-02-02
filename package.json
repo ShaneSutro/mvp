@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "webpack --watch && nodemon ./server/index.js",
     "dev": "nodemon ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --watch"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: "./client/src/index.js",
+  devtool: 'inline-source-map',
   mode: "development",
   module: {
     rules: [
@@ -17,14 +18,19 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "client/dist/"),
-    publicPath: "/client/dist/",
-    filename: "bundle.js"
+    publicPath: "/client/public/dist/",
+    filename: "[name].bundle.js"
   },
-  devServer: {
-    contentBase: path.join(__dirname, "/client/public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/client/dist/",
-    hotOnly: true
-  },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  // devServer: {
+  //   contentBase: path.join(__dirname, "/client/public/"),
+  //   port: 3000,
+  //   publicPath: "http://localhost:3000/client/dist/",
+  //   hotOnly: true
+  // },
+  // plugins: [new webpack.HotModuleReplacementPlugin()],
+  externals: {
+    'react/addons': true,
+    'react/lib/ReactContext': true,
+    'react/lib/ExecutionEnvironment': true
+  }
 }
