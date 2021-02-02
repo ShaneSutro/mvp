@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch && nodemon ./server/index.js",
-    "dev": "nodemon ./server/index.js",
+    "start": "webpack --watch",
+    "dev": "nodemon ./server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production --watch"
   },
@@ -22,6 +22,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.11.14",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "react": "^17.0.1",

@@ -7,7 +7,7 @@ var App = (props) => {
   <div className="App">
     <h1>Data Tracker: Alphabet Identification</h1>
     <h3>Tests and More!</h3>
-    <button onClick={test.get()}>Click Me</button>
+    <button onClick={test.get}>Click Me</button>
   </div>
   )
 }

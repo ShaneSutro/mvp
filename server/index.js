@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-  res.send('<h1>Server Running</h1>')
+  res.send(JSON.stringify({data: 'Success!'}))
 })
 
 app.listen(PORT, (err) => {
