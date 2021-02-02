@@ -19,5 +19,17 @@ module.exports = {
         }
       })
     })
+  },
+
+  readAll: () => {
+    return new Promise((resolve, reject) => {
+      Student.find((err, students) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(students);
+        }
+      })
+    })
   }
 }
