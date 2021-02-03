@@ -16,5 +16,13 @@ module.exports = {
         .then(students => resolve(students))
         .catch(err => reject(err))
     });
+  },
+
+  update: (conditions, update) => {
+    return new Promise((resolve, reject) => {
+      Student.update(conditions, update)
+        .then(conf => resolve(conf))
+        .catch(err => reject(err))
+    })
   }
 }

@@ -31,5 +31,17 @@ module.exports = {
         }
       })
     })
+  },
+
+  update: (conditions, update) => {
+    return new Promise((resolve, reject) => {
+      Student.findOneAndUpdate(conditions, update, { new: true }, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      })
+    })
   }
 }

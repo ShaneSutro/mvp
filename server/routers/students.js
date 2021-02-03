@@ -3,18 +3,20 @@ const router = express.Router();
 const studentController = require('../controller/student');
 
 router.post('/create', (req, res) => {
-  studentController
-    .create(req.body)
+  studentController.create(req.body)
     .then((response) => {
       res.sendStatus(201);
     })
-    .catch((err) => res.sendStatus(500));
+    .catch((err) => res.sendStatus(400));
 });
 
 router.post('/update', (req, res) => {
-  //TODO: finish me
-  console.log(req.body);
-  res.end();
+  studentController.update(req.body.conditions, req.body.update)
+    .then((conf) => {
+      console.log('Update:', conf)
+      res.sendStatus(200)
+    })
+    .catch((err) => res.sendStatus(400))
 });
 
 router.get('/all', (req, res) => {
@@ -24,7 +26,7 @@ router.get('/all', (req, res) => {
       res.end(students.toString());
     })
     .catch((err) => {
-      res.sendStatus(500);
+      res.sendStatus(400);
     });
 });
 
