@@ -9,6 +9,7 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/public')))
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use('/students', require('./routers/students.js'))
+app.use('/assessments', require('./routers/assessments.js'))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));

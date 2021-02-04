@@ -5,7 +5,7 @@ var Actions = (props) => {
   return (
     <div className="actions">
       {props.actions.map(action => {
-        return <ActionItem key={action} />
+        return <ActionItem key={action} name={action} />
       })}
     </div>
   )
