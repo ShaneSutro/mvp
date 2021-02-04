@@ -23,7 +23,7 @@ router.get('/all', (req, res) => {
   studentController
     .readAll()
     .then((students) => {
-      res.end(students.toString());
+      res.send(students);
     })
     .catch((err) => {
       res.sendStatus(400);

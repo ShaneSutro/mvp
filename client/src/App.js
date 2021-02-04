@@ -2,6 +2,7 @@ import React from 'react'
 import Actions from './components/Actions'
 import Assessments from './components/Assessment'
 import Students from './components/Students'
+import studentController from './controller/students'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,8 +14,6 @@ class App extends React.Component {
       allStudents: [{id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0}]
     }
   }
-
-
 
   render() {
     return (
@@ -33,6 +32,14 @@ class App extends React.Component {
         </div>
     </div>
     )
+  }
+
+  componentDidMount() {
+    studentController.getAll()
+      .then(data => data.json())
+      .then(students => {
+      this.setState({allStudents: students})
+    })
   }
 }
 
