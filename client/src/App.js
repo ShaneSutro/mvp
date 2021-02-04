@@ -13,8 +13,13 @@ class App extends React.Component {
       actions: ['Add Student', 'Save Assessment', 'Cancel'],
       assessmentItems: ['a', 'b', 'c', 'd'],
       assessments: [],
-      allStudents: [{id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0}]
+      allStudents: [{ id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0 }],
+      knownLetters: {}
     }
+  }
+
+  checkbox(e) {
+    this.setState({lettersKnown: {...this.state.lettersKnown, lettersKnown[e.target.id]: e.target.checked}})
   }
 
   selectStudent(e) {
@@ -30,13 +35,14 @@ class App extends React.Component {
     return (
     <div>
       <div className="title">
-        <h1>Data Tracker: Alphabet Identification</h1>
+          <h1>Data Tracker: Alphabet Identification</h1>
+          <h2>Lowercase</h2>
       </div>
       <div>
           <Actions actions={this.state.actions}/>
       </div>
         <div>
-          <Assessments currentStudent={{ name: this.state.selectedStudent, items: this.state.assessments }}/>
+          <Assessments checkbox={this.checkbox.bind(this)} currentStudent={{ name: this.state.selectedStudent, items: this.state.assessments }}/>
         </div>
         <div>
           <Students students={this.state.allStudents} clickHandler={this.selectStudent.bind(this)} />
@@ -55,8 +61,13 @@ class App extends React.Component {
     assessmentController.getAll()
       .then(data => data.json())
       .then(assessments => {
-        this.setState({assessments})
+        var lettersKnown = {}
+        for (const item of assessments) {
+          lettersKnown[item.item] = false
+        }
+        this.setState({assessments, lettersKnown})
       })
+
   }
 }
 

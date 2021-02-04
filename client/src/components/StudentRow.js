@@ -2,7 +2,7 @@ import React from 'react';
 
 var StudentRow = (props) => {
   return (
-    <button onClick={props.clickHandler} >{props.student.firstName} {props.student.lastName}</button>
+    <button className="student-row" onClick={props.clickHandler} >{props.student.firstName} {props.student.lastName}</button>
   )
 }
 
