@@ -1,16 +1,32 @@
 import React from 'react'
-// import {hot} from "react-hot-loader";
-import test from './test'
+import Actions from './components/Actions'
+import Assessments from './components/Assessment'
 
-var App = (props) => {
-  return(
-  <div className="App">
-    <h1>Data Tracker: Alphabet Identification</h1>
-    <h3>Tests and More!</h3>
-    <button onClick={test.get}>Click Me</button>
-  </div>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedStudent: 'Select a student',
+      actions: ['action1', 'action2', 'action3'],
+      assessmentItems: ['a', 'b', 'c', 'd']
+    }
+  }
+
+  render() {
+    return (
+    <div>
+      <div className="title">
+        <h1>Data Tracker: Alphabet Identification</h1>
+      </div>
+      <div>
+          <Actions actions={this.state.actions}/>
+      </div>
+        <div>
+          <Assessments currentStudent={{ name: this.state.selectedStudent, items: this.state.assessmentItems }}/>
+      </div>
+    </div>
+    )
+  }
 }
 
-// export default hot(module)(App);
 export default App;
