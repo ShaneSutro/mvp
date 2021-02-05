@@ -14,16 +14,14 @@ class App extends React.Component {
       assessmentItems: ['a', 'b', 'c', 'd'],
       assessments: [],
       allStudents: [{ id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0 }],
-      knownLetters: {}
+      lettersKnown: {}
     }
   }
 
   checkbox(e) {
     var newState = { ...this.state.lettersKnown };
     newState[e.target.id] = e.target.checked;
-    console.log(e.target.id)
     this.setState({lettersKnown: newState})
-    // this.setState({lettersKnown: {...this.state.lettersKnown, lettersKnown[e.target.id]: e.target.checked}})
   }
 
   selectStudent(e) {
@@ -32,7 +30,11 @@ class App extends React.Component {
   }
 
   resetAssessment() {
-    this.setState({assessmentItems: []})
+    var newState = { ...this.state.lettersKnown }
+    for (var key in newState) {
+      newState[key] = false
+    }
+    this.setState({lettersKnown: newState})
   }
 
   render() {
@@ -46,7 +48,7 @@ class App extends React.Component {
           <Actions actions={this.state.actions}/>
       </div>
         <div>
-          <Assessments checkbox={this.checkbox.bind(this)} currentStudent={{ name: this.state.selectedStudent, items: this.state.assessments }}/>
+          <Assessments checkbox={this.checkbox.bind(this)} currentStudent={{ name: this.state.selectedStudent, items: this.state.assessments, lettersKnown: this.state.lettersKnown }}/>
         </div>
         <div>
           <Students students={this.state.allStudents} clickHandler={this.selectStudent.bind(this)} />
