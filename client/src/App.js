@@ -32,7 +32,6 @@ class App extends React.Component {
       alert('You have unsaved changes! Please save before choosing a new name.')
       return
     }
-    console.log(this.state.allStudents[e.target.id].letters)
     var incomingLetters = this.state.allStudents[e.target.id].letters
     this.setState({ lettersKnown: incomingLetters, unsavedChanges: false })
     this.setState({ selectedStudent: e.target.innerText, selectedStudentObject: this.state.allStudents[e.target.id]})
@@ -57,14 +56,18 @@ class App extends React.Component {
         }
       })
       .catch(err => console.log(err))
+    //TODO: clear out the entry box when saved
   }
 
   saveAssessment(event) {
-    console.log('Saving assessment')
     var student = { ...this.state.selectedStudentObject }
     student.letters = this.state.lettersKnown;
-    assessmentController.saveAssessment(student)
+    student.conditions = { _id: student._id }
+    student.update = { letters: student.letters }
+    studentController.saveAssessment(student)
       .then(data => console.log(data))
+    this.setState({ unsavedChanges: false, selectedStudent: 'Saved!' })
+    this.componentDidMount()
   }
 
   studentNameDidChange(event) {

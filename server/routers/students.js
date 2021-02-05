@@ -13,7 +13,6 @@ router.post('/create', (req, res) => {
 router.post('/update', (req, res) => {
   studentController.update(req.body.conditions, req.body.update)
     .then((conf) => {
-      console.log('Update:', conf)
       res.sendStatus(200)
     })
     .catch((err) => res.sendStatus(400))

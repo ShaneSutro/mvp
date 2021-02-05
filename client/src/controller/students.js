@@ -6,12 +6,18 @@ module.exports = {
   },
 
   create: (student) => {
-    console.log(student)
-    console.log('student:', student)
-    return fetch(url + '/create',{
+    return fetch(url + '/create', {
       method: 'POST',
       body: JSON.stringify(student),
       headers: {'Content-Type': 'application/json'}
     });
   },
+
+  saveAssessment: (student) => {
+    return fetch(url + '/update', {
+      method: 'POST',
+      body: JSON.stringify(student),
+      headers: {'Content-Type': 'application/json'}
+    })
+  }
 };
