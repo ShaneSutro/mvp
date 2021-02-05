@@ -5,9 +5,10 @@ var Actions = (props) => {
   return (
     <div className="actions">
       {props.actions.map(action => {
-        var save;
-        action === "Add Student" ? save = props.save : save = () => { }
-        return <ActionItem key={action} name={action} save={save} />
+        var handleClick;
+        action === "Add Student" ? handleClick = props.save : handleClick = () => { };
+        action === "Save Assessment" ? handleClick = props.assessment : handleClick = () => { };
+        return <ActionItem key={action} name={action} action={props.clickHandlers[action]} />
       })}
     </div>
   )

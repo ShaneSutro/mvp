@@ -8,4 +8,10 @@ router.get('/all', (req, res) => {
     .catch(err => res.sendStatus(400));
 })
 
+router.post('/saveAssessment', (req, res) => {
+  assessmentController.saveAssessment(req.body)
+    .then(response => res.send(response))
+    .catch(err => res.sendStatus(400))
+})
+
 module.exports = router;

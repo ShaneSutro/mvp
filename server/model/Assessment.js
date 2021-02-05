@@ -14,5 +14,17 @@ module.exports = {
         }
       })
     })
+  },
+
+  saveAssessment: (student) => {
+    return new Promise((resolve, reject) => {
+      Assessment.findOneAndUpdate({ _id: student._id }, { letters: student.letters }, { new: true }, (err, response) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(response)
+        }
+      })
+    })
   }
 }

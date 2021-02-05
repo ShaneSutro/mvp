@@ -6,11 +6,13 @@ const Student = mongoose.model('Student', schema.studentsSchema);
 module.exports = {
   create: (options) => {
     return new Promise((resolve, reject) => {
+      console.log(options)
       const student = new Student();
       student.firstName = options.firstName;
       student.lastName = options.lastName;
       student.grade = options.grade;
-      student.lettersKnown = 0
+      student.lettersKnown = 0;
+      student.letters = options.letters;
       student.save((err, data) => {
         if (err) {
           reject(error);

@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       selectedStudent: 'Select a student',
+      selectedStudentObject: {},
       actions: ['Add Student', 'Save Assessment', 'Cancel'],
       assessments: [],
       allStudents: [{ id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0 }],
@@ -31,21 +32,19 @@ class App extends React.Component {
       alert('You have unsaved changes! Please save before choosing a new name.')
       return
     }
-    this.setState({ selectedStudent: e.target.innerText })
-    this.resetAssessment()
-  }
-
-  resetAssessment() {
-    var newState = { ...this.state.lettersKnown }
-    for (var key in newState) {
-      newState[key] = false
-    }
-    this.setState({lettersKnown: newState, unsavedChanges: false})
+    console.log(this.state.allStudents[e.target.id].letters)
+    var incomingLetters = this.state.allStudents[e.target.id].letters
+    this.setState({ lettersKnown: incomingLetters, unsavedChanges: false })
+    this.setState({ selectedStudent: e.target.innerText, selectedStudentObject: this.state.allStudents[e.target.id]})
   }
 
   saveStudent(event) {
     if (this.state.newStudent === '') { return; }
-    var student = { grade: 'K', lettersKnown: 0 }
+    var letters = { ...this.state.lettersKnown }
+    for (var key in letters) {
+      letters[key] = false
+    }
+    var student = { grade: 'K', lettersKnown: 0, letters }
     var name = this.state.newStudent.split(' ');
     student.firstName = name[0];
     student.lastName = name[1];
@@ -60,6 +59,14 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  saveAssessment(event) {
+    console.log('Saving assessment')
+    var student = { ...this.state.selectedStudentObject }
+    student.letters = this.state.lettersKnown;
+    assessmentController.saveAssessment(student)
+      .then(data => console.log(data))
+  }
+
   studentNameDidChange(event) {
     this.setState({newStudent: event.target.value})
   }
@@ -72,7 +79,7 @@ class App extends React.Component {
           <h2>Lowercase</h2>
       </div>
         <div>
-          <Actions actions={this.state.actions} save={this.saveStudent.bind(this)} />
+          <Actions actions={this.state.actions} clickHandlers={{'Add Student': this.saveStudent.bind(this), 'Save Assessment': this.saveAssessment.bind(this)}} save={this.saveStudent.bind(this)} assessment={this.saveAssessment.bind(this)} />
           <input onChange={this.studentNameDidChange.bind(this)} className="new-student" placeholder="Enter student's name"></input>
       </div>
         <div>

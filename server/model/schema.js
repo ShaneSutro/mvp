@@ -7,7 +7,8 @@ module.exports.studentsSchema = new Schema({
   firstName: String,
   lastName: String,
   grade: String,
-  lettersKnown: Number
+  lettersKnown: Number,
+  letters: Object
 });
 
 module.exports.lettersSchema = new Schema({

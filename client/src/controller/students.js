@@ -6,6 +6,7 @@ module.exports = {
   },
 
   create: (student) => {
+    console.log(student)
     console.log('student:', student)
     return fetch(url + '/create',{
       method: 'POST',
