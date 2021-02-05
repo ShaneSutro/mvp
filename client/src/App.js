@@ -19,7 +19,11 @@ class App extends React.Component {
   }
 
   checkbox(e) {
-    this.setState({lettersKnown: {...this.state.lettersKnown, lettersKnown[e.target.id]: e.target.checked}})
+    var newState = { ...this.state.lettersKnown };
+    newState[e.target.id] = e.target.checked;
+    console.log(e.target.id)
+    this.setState({lettersKnown: newState})
+    // this.setState({lettersKnown: {...this.state.lettersKnown, lettersKnown[e.target.id]: e.target.checked}})
   }
 
   selectStudent(e) {
