@@ -11,20 +11,26 @@ class App extends React.Component {
     this.state = {
       selectedStudent: 'Select a student',
       actions: ['Add Student', 'Save Assessment', 'Cancel'],
-      assessmentItems: ['a', 'b', 'c', 'd'],
       assessments: [],
       allStudents: [{ id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0 }],
-      lettersKnown: {}
+      lettersKnown: {},
+      newStudent: '',
+      unsavedChanges: false
     }
   }
 
   checkbox(e) {
+    this.setState({ unsavedChanges: true })
     var newState = { ...this.state.lettersKnown };
     newState[e.target.id] = e.target.checked;
     this.setState({lettersKnown: newState})
   }
 
   selectStudent(e) {
+    if (this.state.unsavedChanges) {
+      alert('You have unsaved changes! Please save before choosing a new name.')
+      return
+    }
     this.setState({ selectedStudent: e.target.innerText })
     this.resetAssessment()
   }
@@ -34,7 +40,28 @@ class App extends React.Component {
     for (var key in newState) {
       newState[key] = false
     }
-    this.setState({lettersKnown: newState})
+    this.setState({lettersKnown: newState, unsavedChanges: false})
+  }
+
+  saveStudent(event) {
+    if (this.state.newStudent === '') { return; }
+    var student = { grade: 'K', lettersKnown: 0 }
+    var name = this.state.newStudent.split(' ');
+    student.firstName = name[0];
+    student.lastName = name[1];
+    studentController.create(student)
+      .then(response => {
+        if (response.status !== 201) {
+          throw err
+        } else if (response.status === 201) {
+          this.componentDidMount()
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
+  studentNameDidChange(event) {
+    this.setState({newStudent: event.target.value})
   }
 
   render() {
@@ -44,8 +71,9 @@ class App extends React.Component {
           <h1>Data Tracker: Alphabet Identification</h1>
           <h2>Lowercase</h2>
       </div>
-      <div>
-          <Actions actions={this.state.actions}/>
+        <div>
+          <Actions actions={this.state.actions} save={this.saveStudent.bind(this)} />
+          <input onChange={this.studentNameDidChange.bind(this)} className="new-student" placeholder="Enter student's name"></input>
       </div>
         <div>
           <Assessments checkbox={this.checkbox.bind(this)} currentStudent={{ name: this.state.selectedStudent, items: this.state.assessments, lettersKnown: this.state.lettersKnown }}/>

@@ -1,3 +1,10 @@
-.actions {
-  background-color: pink;
+.all-students > * {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+button {
+  align-items: center;
+  margin: 10px;
 }

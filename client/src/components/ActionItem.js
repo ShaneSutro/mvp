@@ -2,7 +2,7 @@ import React from 'react';
 
 var ActionItem = (props) => {
   return (
-    <button>{props.name}</button>
+    <button onClick={props.save} >{props.name}</button>
   )
 }
 

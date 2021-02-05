@@ -6,10 +6,11 @@ module.exports = {
   },
 
   create: (student) => {
-    return fetch({
+    console.log('student:', student)
+    return fetch(url + '/create',{
       method: 'POST',
-      url: url + '/create',
-      data: student.toString(),
+      body: JSON.stringify(student),
+      headers: {'Content-Type': 'application/json'}
     });
   },
 };
