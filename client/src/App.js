@@ -15,15 +15,22 @@ class App extends React.Component {
       assessments: [],
       allStudents: [{ id: 'someid', firstName: 'Bill', lastName: 'Stickers', grade: 'K', lettersKnown: 0 }],
       lettersKnown: {},
+      lettersKnownCount: 0,
       newStudent: '',
       unsavedChanges: false
     }
   }
 
   checkbox(e) {
+    if (this.state.selectedStudent === 'Select a student') { return; }
     this.setState({ unsavedChanges: true })
     var newState = { ...this.state.lettersKnown };
     newState[e.target.id] = e.target.checked;
+    if (e.target.checked) {
+      this.setState({lettersKnownCount: this.state.lettersKnownCount + 1})
+    } else {
+      this.setState({lettersKnownCount: this.state.lettersKnownCount - 1})
+    }
     this.setState({lettersKnown: newState})
   }
 
@@ -33,7 +40,8 @@ class App extends React.Component {
       return
     }
     var incomingLetters = this.state.allStudents[e.target.id].letters
-    this.setState({ lettersKnown: incomingLetters, unsavedChanges: false })
+    var incomingLetterCount = this.state.allStudents[e.target.id].lettersKnown
+    this.setState({ lettersKnown: incomingLetters, unsavedChanges: false, lettersKnownCount: incomingLetterCount })
     this.setState({ selectedStudent: e.target.innerText, selectedStudentObject: this.state.allStudents[e.target.id]})
   }
 
@@ -63,7 +71,7 @@ class App extends React.Component {
     var student = { ...this.state.selectedStudentObject }
     student.letters = this.state.lettersKnown;
     student.conditions = { _id: student._id }
-    student.update = { letters: student.letters }
+    student.update = { letters: student.letters, lettersKnown: this.state.lettersKnownCount }
     studentController.saveAssessment(student)
       .then(data => console.log(data))
     this.setState({ unsavedChanges: false, selectedStudent: 'Saved!' })
